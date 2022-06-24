@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package pusher;
+
+option go_package = "/pusher_rpc";
+
+service Pusher {
+  rpc RealTimeQuote (stream RealTimeQuoteRequest) returns (stream RealTimeQuoteResp) {}
+}
+
+enum Op {
+  INIT = 0;
+  SUB = 2;
+  UNSUB = 3;
+}
+
+message RealTimeQuoteRequest {
+  Op op = 1;
+  uint32 userId = 2;
+  repeated Id ids = 3;
+}
+
+message Id {
+  uint32 Exchange = 1;
+  string Code = 2;
+}
+
+message Quote {
+  Id id = 1;
+  string Data = 2;
+}
+
+message RealTimeQuoteResp {
+  repeated Quote quote = 1;
+}
