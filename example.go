@@ -47,10 +47,10 @@ func main() {
 	//订阅非法id不会获得推送信息
 	id = quote.Id{
 		Exchange: 0,
-		Code:     "",
+		Code:     "invalid_code",
 	}
 	client.Sub(id)
-	log.Printf("subscirbe: %v\n", id)
+	log.Printf("invalild subscirbe: %v\n", id)
 
 	<-time.After(30 * time.Second)
 

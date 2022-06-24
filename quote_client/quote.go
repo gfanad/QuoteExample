@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	BUFFER_SIZE = 100
+	BufferSize = 100
 )
 
 type Id struct {
@@ -58,7 +58,7 @@ func NewClient(ctx context.Context, opt Options) *Client {
 		pusherClient: pusherClient,
 		subChan:      make(chan Id, 10),
 		unSubChan:    make(chan Id, 10),
-		readBuffer:   make(chan Quote, BUFFER_SIZE),
+		readBuffer:   make(chan Quote, BufferSize),
 	}
 
 	return c
@@ -68,7 +68,6 @@ func (c *Client) start() {
 	stream, err := c.pusherClient.RealTimeQuote(c.ctx)
 	if err != nil {
 		panic(err)
-		return
 	}
 
 	err = stream.Send(&pusherrpc.RealTimeQuoteRequest{
